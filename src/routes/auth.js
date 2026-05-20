@@ -193,9 +193,8 @@ router.post("/reset-password", async (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  console.log("BODY LOGIN:", req.body);
-
   const { email, password } = req.body;
+  const normalized = normalizeEmail(email || "");
 
   if (!normalized || !password) {
     return res.status(400).json({ ok: false, error: "Email y contraseña requeridos." });
